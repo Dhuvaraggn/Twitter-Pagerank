@@ -1,0 +1,27 @@
+<html>
+    
+    <body>
+        <h1 style="text-align:center"> BDA Project Twitter PageRank</h1>
+
+        <div style="margin: auto;
+        width: 50%;
+        border: 5px solid #73AD21;
+        padding: 10px; justify-content: center;
+        align-items: center;"
+        >
+            <h2 style="text-align:center">Top 10 hashtags</h2>
+            {% for i in trend %}
+                <form method="post" action="/pagerank">
+                    {% csrf_token %}
+                    <button style="margin: 0;
+                        position: relative;font-size:25px;text-align:center; display:flex;justify-content:      center;background:lightskyblue;
+                    align-items: center;border-color: peru;border-width: 2px;" name="{{i}}" value="{{i}}">
+                        {{ i }}
+                    </button>
+                </form>
+
+            {% endfor %}
+        </div>
+
+    </body>
+</html>

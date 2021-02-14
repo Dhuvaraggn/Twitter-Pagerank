@@ -1,0 +1,63 @@
+<html>
+    <body>
+        <h1 style="text-align: center">
+           BDA Project Twitter PageRank
+        </h1>
+            <div>
+                    <div style="width:50%;
+                    float: left;
+                    width: 50%;
+                    border: 5px solid lightsalmon;
+                    padding: 10px;
+                ">
+                        <h2 style="text-align:center">Pagerank of {{hashtag}} hashtag</h2>
+                        <table style="display:flex;justify-content: center;
+                        align-items: center;"> 
+                        <tr>
+                        <th style="border-color:#3669f8; 
+                        border-style:solid; 
+                        border-width:3px;"><h2> Twitter Account  </h2></th>
+                        <th style="border-color:#3669f8; 
+                        border-style:solid; 
+                        border-width:3px;"><h2> PageRank Score  </h2></th>
+                        </tr>
+                    {% for  i  in rank %}
+                    <tr>
+                        {% for j in i %}
+                        <td style="border-color:#5af53b; 
+                        border-style:solid; 
+                        border-width:3px;"><h3>{{j}}</h3></td>
+                        {% endfor %}
+                    </tr>
+                    {% endfor %}
+                        </table>
+                </div>
+                    
+
+
+                    <div style="
+                        float: right;
+                        width: 40%;
+                        border: 5px solid #73AD21;
+                        padding: 10px; justify-content: center;
+                        align-items: center;"
+                    >
+                        <h2 style="text-align:center">Top 10 hashtags</h2>
+                        {% for i in trend %}
+                        <form method="post" action="/pagerank">
+                            {% csrf_token %}
+                        <button style="font-size:25px;text-align:center; display:flex;justify-content: center;background:lightskyblue;
+                        align-items: center;border-color: peru;border-width: 2px;" name="{{i}}" value="{{i}}">
+                            {{ i }}
+                        </button>
+                        </form>
+                
+                                {% endfor %}
+                    </div>
+                    </div>
+                    <div>
+                        <img src="data:image/png;base64,{{ image }}">
+                    </div>
+
+    </body>
+</html>
