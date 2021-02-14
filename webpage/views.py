@@ -57,7 +57,7 @@ def pagerank(request):
 #        with open(filename, "rb") as image_file:
 #            image_data = base64.b64encode(image_file.read()).decode('utf-8')
 #        ctx = image_data
-        return render(request,'pageranked.html',{'rank':ans,'trend':tr,'hashtag':hashtag,'image':ctx })
+        return render(request,'pageranked.html',{'rank':ans,'trend':tr,'hashtag':hashtag })
         
 def startcrawler(request):
 
