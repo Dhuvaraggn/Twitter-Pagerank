@@ -99,17 +99,14 @@ def crawler(tr):
     date_since=yesterday
 
     filename=hashtag+".json"
-    if(os.path.isfile(filename)):
-        print("fileexist")
-    else:
-        print("start")
-        tweets = tweepy.Cursor(api.search, q=hashtag, lang="en", since=date_since, tweet_mode='extended').items(1000) 
-        
-        f=open(filename,'w')
+    
+    print("start")
+    tweets = tweepy.Cursor(api.search, q=hashtag, lang="en", since=date_since, tweet_mode='extended').items(1000) 
+    f=open(filename,'w')
 
-        for i in tweets:
-            js=json.dumps(i._json)
-            f.write(js+"\n") 
+    for i in tweets:
+        js=json.dumps(i._json)
+        f.write(js+"\n") 
 
     hashtag1=tr[1] 
     today = date.today() 
@@ -117,17 +114,15 @@ def crawler(tr):
     date_since=yesterday
 
     filename1=hashtag1+".json"
-    if(os.path.isfile(filename1 )):
-        print("fileexist")
-    else:
-        print("start")
-        tweets = tweepy.Cursor(api1.search, q=hashtag1, lang="en", since=date_since, tweet_mode='extended').items(1000) 
+    
+    print("start")
+    tweets1 = tweepy.Cursor(api1.search, q=hashtag1, lang="en", since=date_since, tweet_mode='extended').items(1000) 
         
-        f=open(filename1,'w')
+    f1=open(filename1,'w')
 
-        for i in tweets:
-            js=json.dumps(i._json)
-            f.write(js+"\n") 
+    for i in tweets1:
+        js=json.dumps(i._json)
+        f1.write(js+"\n") 
     
     return 1
 
