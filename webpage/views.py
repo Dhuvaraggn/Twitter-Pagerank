@@ -14,6 +14,12 @@ consumer_secret = "DqbksdWSNXYvIMBFMXzvYHlD7HfJs0X5OhTqtg7SUgJ64DEgMu"
 access_token = "926819010288656387-WTeeYlVeV0IdE2q83BrRUClgtRPnfwC" 
 access_token_secret = "zJs1khFyE2HXuPhViOy7C5uDDogkEonE5snqlPq435J8I"
 
+consumer_key1="ppGPO0Z5JekRF15V596TraNNL"
+consumer_secret1="P3svmqEQnvcDAkN8dXsgoPQmFvAtuiWWNW30QvcJhzyHagOxUA"
+access_token1="926819010288656387-vFkenC2ya8nekSiF0RbHykYzrg9Edjz"
+access_token_secret1="6UZASrp3nL5VegGIYhEuxvxO9Yg41Z82zfVvEOyJVKOl7"
+
+
 def getTrends():
     auth = tweepy.OAuthHandler(consumer_key, consumer_secret) 
     auth.set_access_token(access_token, access_token_secret) 
@@ -82,26 +88,47 @@ def crawler(tr):
     auth = tweepy.OAuthHandler(consumer_key, consumer_secret) 
     auth.set_access_token(access_token, access_token_secret) 
     api = tweepy.API(auth)
+
+    auth1=tweepy.OAuthHandler(consumer_key1, consumer_secret1)
+    auth1.set_access_token(access_token1, access_token_secret1) 
+    api1=tweepy.API(auth1)
+
+    hashtag=tr[0]
+    today = date.today() 
+    yesterday = today - timedelta(days = 1) 
+    date_since=yesterday
+
+    filename=hashtag+".json"
+    if(os.path.isfile(filename)):
+        print("fileexist")
+    else:
+        print("start")
+        tweets = tweepy.Cursor(api.search, q=hashtag, lang="en", since=date_since, tweet_mode='extended').items(1000) 
+        
+        f=open(filename,'w')
+
+        for i in tweets:
+            js=json.dumps(i._json)
+            f.write(js+"\n") 
+
+    hashtag1=tr[1] 
+    today = date.today() 
+    yesterday = today - timedelta(days = 1) 
+    date_since=yesterday
+
+    filename1=hashtag1+".json"
+    if(os.path.isfile(filename1 )):
+        print("fileexist")
+    else:
+        print("start")
+        tweets = tweepy.Cursor(api1.search, q=hashtag1, lang="en", since=date_since, tweet_mode='extended').items(1000) 
+        
+        f=open(filename1,'w')
+
+        for i in tweets:
+            js=json.dumps(i._json)
+            f.write(js+"\n") 
     
-    for i in tr:
-        print(i)
-        hashtag=i
-        today = date.today() 
-        yesterday = today - timedelta(days = 1) 
-        date_since=yesterday
-
-        filename=hashtag+".json"
-        if(os.path.isfile(filename)):
-            print("fileexist")
-        else:
-            print("start")
-            tweets = tweepy.Cursor(api.search, q=hashtag, lang="en", since=date_since, tweet_mode='extended').items(1000) 
-            
-            f=open(filename,'w')
-
-            for i in tweets:
-                js=json.dumps(i._json)
-                f.write(js+"\n")
     return 1
 
 
